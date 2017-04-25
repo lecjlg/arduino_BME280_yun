@@ -46,19 +46,38 @@ void setup() {
     }
     
     Serial1.println("Temperature,Pressure,Altitude,Humidity");
-    delayTime = 500;
+    delayTime = 1000;
+
+    Serial.println("Temperature,Pressure,Altitude,Humidity");
+
 
       
 }
 
 
 void loop() { 
+  delay(delayTime);
     printValues();
-    delay(delayTime);
+    
 }
 
 
 void printValues() {
+ Serial.print(bme.readTemperature());
+    Serial.print(",");
+
+    Serial.print(bme.readPressure() / 100.0F);
+    Serial.print(",");
+
+
+    Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
+    Serial.print(",");
+
+
+    Serial.print(bme.readHumidity());
+    Serial.print(",");
+
+    Serial1.println();
   
     Serial1.print(bme.readTemperature());
     Serial1.print(",");
@@ -75,5 +94,5 @@ void printValues() {
     Serial1.print(",");
 
     Serial1.println();
-
+    Serial.println();
 }
